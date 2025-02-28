@@ -137,7 +137,7 @@ async function runTests(cover, all) {
 		}
 
 		// const runner = require('@axway/gulp-tasks/src/test-runner');
-		await runner.runTests({
+		await runner({
 			all,
 			cover,
 			projectDir: __dirname,
