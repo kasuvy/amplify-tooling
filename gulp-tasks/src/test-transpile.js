@@ -67,7 +67,11 @@ if (process.env.AXWAY_COVERAGE) {
 	const distGRegExp = /([/\\])dist([/\\]|$)/g;
 
 	Module._resolveFilename = function (request, parent, isMain, options) {
-		request = request.replace("file://", "");
+		if (process.platform === 'win32') {
+			request = request.replace("file:///", "");
+		} else {
+			request = request.replace("file://", "");
+		}
 		let resolved = originalResolveFilename(request, parent, isMain, options);
 
 		if (resolved.startsWith(cwd) && !resolved.includes('node_modules') && distRegExp.test(resolved)) {
